@@ -1,10 +1,8 @@
 package com.example.security.Controller;
 
 
-import com.example.security.Payload.AuthenticationRequest;
 import com.example.security.Payload.AuthenticationResponse;
 import com.example.security.Payload.RegisterRequest;
-import com.example.security.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,19 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/auth")
-public class UserController {
-
-    private final UserService userService;
+@RequestMapping("/api/v1/demo")
+public class DemoController {
 
     @PostMapping("/register")
-    public AuthenticationResponse register(@RequestBody RegisterRequest request){
-        return userService.register(request);
-    }
-
-
-    @PostMapping("/authenticate")
-    public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest request){
-        return userService.authenticate(request);
+    public ResponseEntity<String> register(@RequestBody RegisterRequest request){
+        return ResponseEntity.ok("Helllo");
     }
 }

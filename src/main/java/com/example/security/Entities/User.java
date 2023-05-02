@@ -1,6 +1,7 @@
 package com.example.security.Entities;
 
 
+import com.example.security.Enums.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,23 +35,29 @@ public class User  implements UserDetails {
     //@Enumerated(EnumType.STRING)
     //private Role role;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles = new HashSet<>();
+   // @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+   // @JoinTable(
+         //   name = "users_roles",
+         //   joinColumns = @JoinColumn(name = "user_id"),
+        //    inverseJoinColumns = @JoinColumn(name = "role_id")
+   // )
+    //private Set<Role> roles = new HashSet<>();
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<Role> roles = getRoles();
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
+       // Set<Role> roles = getRoles();
+       // List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-        return authorities;
+       // for (Role role : roles) {
+           // authorities.add(new SimpleGrantedAuthority(role.getName()));
+       // }
+
+       // return authorities;
+
+      return   List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
